@@ -40,7 +40,8 @@
   aside .brand .sb-bold{color:var(--ink);font-weight:700}
   nav{margin-top:26px;display:flex;flex-direction:column;gap:2px}
   nav a{color:var(--ink);text-decoration:none;font-size:13px;padding:7px 10px;border:2px solid transparent;
-    border-radius:var(--r);transition:.12s;display:flex;gap:9px;align-items:center;font-weight:500}
+    border-radius:var(--r);transition:background-color .12s ease-out,color .12s ease-out,box-shadow .12s ease-out,transform .12s ease-out;display:flex;gap:9px;align-items:center;font-weight:500}
+  nav a:active{transform:scale(.98)}
   nav a .n{color:var(--acc);font-family:var(--display);font-variant-numeric:tabular-nums;font-size:12px;font-weight:700;min-width:16px}
   nav a:hover{background:var(--acc-soft)}
   nav a.active{background:var(--acc);color:#fff;border-color:var(--border);box-shadow:3px 3px 0 var(--border-light);font-weight:600}
@@ -119,6 +120,15 @@
   main a{color:var(--acc);font-weight:600}
   @media(max-width:920px){main table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
   @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  /* bouton retour en haut (rond bleu), standard des propales TRACTR */
+  .backtop{position:fixed;right:22px;bottom:22px;width:44px;height:44px;border-radius:50%;background:var(--acc);
+    border:2px solid var(--border);box-shadow:3px 3px 0 var(--border-light);display:flex;align-items:center;justify-content:center;
+    cursor:pointer;opacity:0;pointer-events:none;transition:opacity .15s ease-out,transform .12s ease-out;z-index:50;padding:0}
+  .backtop.on{opacity:1;pointer-events:auto}
+  .backtop:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--acc-mid)}
+  .backtop:active{transform:scale(.95)}
+  .backtop svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  @media print{.backtop{display:none}}
   @media print{aside{display:none}.wrap{grid-template-columns:1fr}main{padding:0}body::before{display:none}
     .card,.scopebox,.tiroir,table,.tot,.callout,.step{box-shadow:none}h2{break-after:avoid}table,.card{break-inside:avoid}}
 </style>
@@ -289,10 +299,13 @@
   </main>
 </div>
 
+<button class="backtop" id="backtop" aria-label="Revenir en haut de la page"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></button>
+
 <script>
 /* Navigation : surligne l'entrée active au scroll + scroll doux au clic. NE PAS modifier. */
 const links=[...document.querySelectorAll('#nav a')];
 const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+const backtop=document.getElementById('backtop');
 function onScroll(){
   let i=secs.length-1;
   for(let k=0;k<secs.length;k++){
@@ -301,6 +314,7 @@ function onScroll(){
   if(i<0)i=0;
   links.forEach(l=>l.classList.remove('active'));
   if(links[i])links[i].classList.add('active');
+  backtop.classList.toggle('on',window.scrollY>600);
 }
 document.addEventListener('scroll',onScroll,{passive:true});
 onScroll();
@@ -309,6 +323,7 @@ links.forEach(a=>a.addEventListener('click',e=>{
   e.preventDefault();
   document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:reduceMotion?'auto':'smooth'});
 }));
+backtop.addEventListener('click',()=>window.scrollTo({top:0,behavior:reduceMotion?'auto':'smooth'}));
 </script>
 </body>
 </html>
