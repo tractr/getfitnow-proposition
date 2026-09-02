@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>TRACTR × GetFitNow : Proposition connexion et paiements</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ===== TRACTR NÉO-BRUT — design tokens (NE PAS modifier sauf demande explicite) ===== */
+  :root{
+    --bg:#FDFDFD; --bg-alt:#F4F4FF; --card-bg:#ffffff;
+    --ink:#1a1a1a; --ink2:#1a1a1a; --muted:#5a5a5a; --faint:#5a5a5a;
+    --acc:#0000ff; --acc-soft:#E8E8FF; --acc-mid:#6666ff;
+    --pink:#ffdcf0; --pink-strong:#ffb8dd; --green:#B3F4D1; --yellow:#FFF2C8; --blue-light:#8BD8FD;
+    --border:#1a1a1a; --border-light:#d0d0d0;
+    --v1ink:#0a7d3a; --v2ink:#9a6207;
+    --r:3px;
+    --sh:4px 4px 0 var(--border-light);
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:'DM Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --display:'Space Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.6;font-size:15px;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  body::before{content:'';position:fixed;inset:0;opacity:.02;pointer-events:none;z-index:9999;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px 200px}
+  .wrap{display:grid;grid-template-columns:264px 1fr;max-width:1180px;margin:0 auto;gap:0;background:var(--bg)}
+  aside{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;padding:28px 20px;
+    border-right:2px solid var(--border);background:var(--bg)}
+  aside .brand{display:flex;flex-direction:column;gap:9px}
+  aside .brand .sb-title{font-family:var(--display);font-size:13.5px;line-height:1.35}
+  aside .brand .sb-blue{color:var(--acc);font-weight:700}
+  aside .brand .sb-reg{color:var(--muted);font-weight:400}
+  aside .brand .sb-bold{color:var(--ink);font-weight:700}
+  nav{margin-top:26px;display:flex;flex-direction:column;gap:2px}
+  nav a{color:var(--ink);text-decoration:none;font-size:13px;padding:7px 10px;border:2px solid transparent;
+    border-radius:var(--r);transition:.12s;display:flex;gap:9px;align-items:center;font-weight:500}
+  nav a .n{color:var(--acc);font-family:var(--display);font-variant-numeric:tabular-nums;font-size:12px;font-weight:700;min-width:16px}
+  nav a:hover{background:var(--acc-soft)}
+  nav a.active{background:var(--acc);color:#fff;border-color:var(--border);box-shadow:3px 3px 0 var(--border-light);font-weight:600}
+  nav a.active .n{color:#fff}
+  main{padding:46px 56px 90px;min-width:0}
+  .line-accent{width:56px;height:5px;background:var(--acc);margin:0 0 14px}
+  .cobrand{display:flex;align-items:center;gap:18px;margin-bottom:20px}
+  .cobrand img{display:block;width:auto}
+  .cobrand .cb-tractr{height:26px}
+  .cobrand .cb-client{height:44px}
+  .cobrand .cb-x{font-family:var(--display);font-size:22px;color:var(--border-light);font-weight:400;line-height:1}
+  .eyebrow{display:inline-block;font-family:var(--display);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    color:#fff;background:var(--acc);border:2px solid var(--border);padding:5px 12px;border-radius:var(--r);box-shadow:3px 3px 0 var(--border-light);margin-bottom:16px}
+  h1{font-family:var(--display);font-size:34px;letter-spacing:-.03em;margin:0 0 10px;font-weight:700;line-height:1.1}
+  .tagline{color:var(--ink2);font-size:16px;margin:0 0 12px;max-width:62ch;line-height:1.5}
+  .meta{color:var(--muted);font-size:12.5px;font-family:var(--mono);padding-bottom:20px;border-bottom:2px solid var(--border)}
+  h2{font-family:var(--display);font-size:24px;letter-spacing:-.02em;margin:54px 0 6px;font-weight:700;line-height:1.15;display:flex;align-items:center;gap:12px}
+  h2 .h2n{font-family:var(--display);font-size:14px;font-weight:700;color:#fff;background:var(--acc);width:32px;height:32px;
+    display:flex;align-items:center;justify-content:center;border:2px solid var(--border);border-radius:var(--r);box-shadow:3px 3px 0 var(--border-light);flex:none}
+  h3{font-family:var(--display);font-size:18px;margin:28px 0 8px;font-weight:600;letter-spacing:-.01em}
+  p{margin:11px 0;max-width:74ch}
+  .lead{color:var(--muted);max-width:64ch;font-size:15.5px}
+  .card{background:var(--card-bg);border:2px solid var(--border);border-radius:var(--r);padding:18px 20px;margin:16px 0;box-shadow:var(--sh)}
+  .card.c-blue{background:var(--acc-soft)}.card.c-pink{background:var(--pink)}.card.c-green{background:var(--green)}.card.c-yellow{background:var(--yellow)}
+  .grid{display:grid;gap:18px}
+  .g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:920px){.wrap{grid-template-columns:1fr}aside{display:none}.g2,.g3{grid-template-columns:1fr}main{padding:28px 22px}}
+  .pill{display:inline-block;font-family:var(--display);font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:var(--r);vertical-align:middle;letter-spacing:.04em;text-transform:uppercase;border:2px solid var(--border)}
+  .pill.v1{background:var(--green);color:#0a3d20}
+  .pill.high{background:var(--pink);color:#7a1340}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin:14px 0;background:var(--card-bg);border:2px solid var(--border);box-shadow:var(--sh)}
+  th{font-family:var(--display);background:var(--acc);color:#fff;font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:700;text-align:left;padding:9px 13px;border-bottom:2px solid var(--border)}
+  td{text-align:left;padding:9px 13px;border-bottom:1.5px solid var(--border-light);vertical-align:top}
+  tbody tr:last-child td,table tr:last-child td{border-bottom:none}
+  tr:nth-child(even) td{background:var(--bg-alt)}
+  .ok{color:var(--v1ink);font-weight:600}.warn{color:var(--v2ink);font-weight:600}.bad{color:#cc0000;font-weight:600}.mut{color:var(--muted)}
+  ul{margin:8px 0;padding-left:20px}li{margin:6px 0;max-width:74ch}
+  .callout{border:2px solid var(--border);background:var(--acc-soft);padding:14px 18px;border-radius:var(--r);margin:18px 0;font-size:14px;color:var(--ink2);box-shadow:var(--sh)}
+  .callout.v1{background:var(--green)}.callout.v2{background:var(--yellow)}.callout.warn{background:var(--pink)}
+  .callout b{color:var(--ink)}
+  .callout p{max-width:none}
+  .scopebox{border:2px solid var(--border);border-radius:var(--r);padding:18px;box-shadow:var(--sh)}
+  .scopebox.out{background:var(--yellow)}
+  .scopebox h3{margin:0 0 10px;font-size:15px}
+  .phase{display:grid;grid-template-columns:150px 1fr auto;gap:18px;align-items:start;padding:14px 0;border-bottom:1.5px solid var(--border-light)}
+  .phase:last-child{border-bottom:none}
+  .phase .p{font-family:var(--display);font-weight:700;color:var(--acc)}
+  .phase .d{font-family:var(--mono);font-size:12px;color:var(--ink);white-space:nowrap;background:var(--acc-soft);padding:3px 9px;border-radius:3px;border:2px solid var(--border)}
+  .steps{display:grid;gap:14px;margin:16px 0}
+  .step{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;background:var(--card-bg);border:2px solid var(--border);border-radius:var(--r);padding:15px 18px;box-shadow:var(--sh)}
+  .step .num{width:36px;height:36px;border-radius:50%;background:var(--acc);color:#fff;font-family:var(--display);font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center;border:2px solid var(--border);box-shadow:2px 2px 0 var(--border-light);flex:none}
+  .step .txt{font-size:13.5px;color:var(--ink2);max-width:none}
+  .step .txt b{font-family:var(--display)}
+  .step .when{font-family:var(--mono);font-size:11px;color:var(--ink);background:var(--acc-soft);padding:4px 10px;border-radius:3px;border:2px solid var(--border);white-space:nowrap}
+  @media(max-width:560px){.step{grid-template-columns:auto 1fr}.step .when{grid-column:2;justify-self:start;margin-top:4px}}
+  .tot{display:flex;justify-content:space-between;align-items:baseline;background:var(--acc);color:#fff;
+    border:2px solid var(--border);border-radius:var(--r);padding:16px 22px;margin-top:16px;box-shadow:4px 4px 0 var(--border-light)}
+  .tot .mut{color:rgba(255,255,255,.82)}
+  .tot b{font-family:var(--display);font-size:19px;letter-spacing:-.01em}
+  .note{font-size:12.5px;color:var(--muted);font-style:italic;max-width:74ch}
+  .kpicards .card{margin:0;border-top:5px solid var(--acc)}
+  .kpicards .lbl{font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--acc);text-transform:uppercase}
+  .tiroir{border:2px solid var(--border);border-radius:var(--r);padding:16px 18px;margin:14px 0;background:var(--card-bg);box-shadow:var(--sh);display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start}
+  .tiroir .t{font-family:var(--display);font-weight:700;font-size:15px;margin-bottom:3px}
+  .tiroir .desc{font-size:13px;color:var(--muted)}
+  .tiroir .price{font-family:var(--display);font-size:13px;font-weight:700;color:#fff;white-space:nowrap;background:var(--acc);padding:6px 12px;border-radius:3px;border:2px solid var(--border);text-align:center}
+  .tiroir .price.done{background:#fff;color:var(--acc)}
+  .ico{width:17px;height:17px;vertical-align:-3px;margin-right:8px;fill:none;stroke:var(--acc);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .facts{display:flex;gap:34px;flex-wrap:wrap;margin:16px 0}
+  .fact .n{font-family:var(--display);font-size:26px;font-weight:700;color:var(--acc);line-height:1.05}
+  .fact .l{font-size:12.5px;color:var(--muted);margin-top:4px;max-width:26ch}
+  a:focus-visible,nav a:focus-visible{outline:2px solid var(--acc);outline-offset:2px;border-radius:2px}
+  .side-foot{margin-top:22px;padding-top:16px;border-top:2px solid var(--border);font-size:12px;font-family:var(--display)}
+  .side-foot a{color:var(--acc);text-decoration:none;font-weight:600;word-break:break-all}
+  .side-foot a:hover{text-decoration:underline}
+  main a{color:var(--acc);font-weight:600}
+  @media(max-width:920px){main table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  @media print{aside{display:none}.wrap{grid-template-columns:1fr}main{padding:0}body::before{display:none}
+    .card,.scopebox,.tiroir,table,.tot,.callout,.step{box-shadow:none}h2{break-after:avoid}table,.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <aside>
+    <div class="brand">
+      <div class="sb-title"><span class="sb-blue">Proposition</span> <span class="sb-reg">pour</span> <span class="sb-bold">GetFitNow</span></div>
+    </div>
+    <nav id="nav">
+      <a href="#depart"><span class="n">1</span>Où on en est</a>
+      <a href="#diagnostic"><span class="n">2</span>Ce que le diagnostic révèle</a>
+      <a href="#connexion"><span class="n">3</span>Chantier 1 · Connexion</a>
+      <a href="#paiements"><span class="n">4</span>Chantier 2 · Paiements</a>
+      <a href="#migration"><span class="n">5</span>La migration, livrée</a>
+      <a href="#calendrier"><span class="n">6</span>Chiffrage et calendrier</a>
+      <a href="#suite"><span class="n">7</span>La suite</a>
+    </nav>
+    <div class="side-foot"><a href="mailto:guillaume@tractr.net">guillaume@tractr.net</a></div>
+  </aside>
+
+  <main>
+    <!-- ===== HERO ===== -->
+    <div class="cobrand">
+      <img class="cb-tractr" src="logo-tractr.png" alt="TRACTR">
+      <span class="cb-x">×</span>
+      <img class="cb-client" src="assets/logo-gfn.png" alt="GetFitNow">
+    </div>
+    <div class="line-accent"></div>
+    <span class="eyebrow">Proposition · Septembre 2026</span>
+    <h1>Connexion et paiements : la remise à niveau</h1>
+    <p class="tagline">Treize chantiers identifiés et mesurés sur vos données réelles, regroupés en deux forfaits, pour un objectif simple : que chaque personne qui veut entrer entre, et que chaque paiement aboutisse.</p>
+    <p class="meta">TRACTR pour Oualid Boubala et Benjamin Macé · GetFitNow · 2 septembre 2026</p>
+
+    <!-- ===== 1. OÙ ON EN EST ===== -->
+    <h2 id="depart"><span class="h2n">1</span>Où on en est</h2>
+    <p class="lead">Depuis juillet, on a repris l'application, sorti l'infrastructure de l'ancien prestataire, et mené un diagnostic complet directement sur la production.</p>
+
+    <div class="grid g3 kpicards">
+      <div class="card"><div class="lbl">Migration livrée</div><b style="font-size:17px">27 août 2026</b><p style="margin:6px 0 0;font-size:13px;color:var(--muted)">25 000 comptes, 14 Go de photos, domaine et déploiement : tout tourne sur votre serveur.</p></div>
+      <div class="card"><div class="lbl">Diagnostic mené</div><b style="font-size:17px">Sur vos données réelles</b><p style="margin:6px 0 0;font-size:13px;color:var(--muted)">25 110 comptes, les journaux de production, et 641 abonnements Stripe examinés un par un.</p></div>
+      <div class="card"><div class="lbl">Chantiers identifiés</div><b style="font-size:17px">13, priorisés</b><p style="margin:6px 0 0;font-size:13px;color:var(--muted)">Chacun localisé précisément dans le code, mesuré sur la production, et chiffré.</p></div>
+    </div>
+
+    <div class="callout"><svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><b>Notre méthode : rien n'est supposé, tout est mesuré.</b> Chaque constat de cette page vient d'un comptage sur la production, en lecture seule. C'est aussi ce qui rend les forfaits fermes : la phase d'investigation, habituellement la moitié du coût d'une correction, est déjà faite et incluse.</div>
+
+    <!-- ===== 2. DIAGNOSTIC ===== -->
+    <h2 id="diagnostic"><span class="h2n">2</span>Ce que le diagnostic révèle</h2>
+    <p class="lead">Vous nous avez remonté deux symptômes : des problèmes de connexion, et un doute sur les paiements. Derrière, le diagnostic met au jour treize chantiers distincts. Les principaux, en langage clair :</p>
+
+    <table>
+      <tr><th scope="col">Ce qui se passe</th><th scope="col">Ampleur mesurée</th></tr>
+      <tr><td>Deux failles de sécurité critiques, une sur la connexion, une sur l'attribution des abonnements</td><td><span class="bad">Tous les comptes exposés</span></td></tr>
+      <tr><td>Un abonnement Fit Motivator sur trois échoue au moment de payer, sans que rien ne remonte</td><td><span class="bad">24 Fit Motivators jamais aboutis</span>, et leurs filleuls avec eux</td></tr>
+      <tr><td>Des filleuls recrutés qui n'arrivent jamais à entrer dans l'application</td><td><span class="warn">2 125 comptes bloqués</span>, dont 307 avec un accès déjà payé par leur parrain</td></tr>
+      <tr><td>L'application déconnecte ses propres utilisateurs en boucle</td><td><span class="warn">~440 déconnexions forcées par jour</span>, pour ~180 connexions réussies</td></tr>
+      <tr><td>Des clients fidèles coupés à tort, des annulations sans effet, des abonnements devenus invisibles</td><td><span class="warn">4 + 7 + 9 cas</span>, tous identifiés nommément</td></tr>
+      <tr><td>Les emails qui échouent disparaissent sans laisser de trace ni déclencher d'alerte</td><td><span class="warn">~130 messages perdus</span> lors de la panne de fin août</td></tr>
+    </table>
+
+    <div class="callout v1"><svg class="ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><b>La bonne nouvelle, vérifiée abonnement par abonnement chez Stripe :</b> personne n'a jamais payé sans obtenir son accès. Le scénario qu'on redoutait, le client débité qui reste à la porte, n'existe pas.</div>
+
+    <div class="callout warn"><svg class="ico" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><b>Le vrai coût est silencieux.</b> Quand un paiement ou une activation échoue, la personne part sans écrire au support. Rien ne remonte. Et dans votre modèle, chaque Fit Motivator perdu emporte avec lui tout le groupe qu'il aurait recruté.</div>
+
+    <p>C'est ce qui change la nature de cette proposition : on ne répare pas deux bugs, on remet à niveau les deux parcours dont dépend tout le modèle, l'entrée dans l'application et le paiement.</p>
+
+    <!-- ===== 3. CHANTIER 1 ===== -->
+    <h2 id="connexion"><span class="h2n">3</span>Chantier 1 · Connexion, inscription et accès</h2>
+    <p class="lead">Tout ce qui se met entre un utilisateur légitime et l'intérieur de l'application. Six sous-chantiers, traités jusqu'à un parcours d'entrée qui fonctionne de bout en bout.</p>
+
+    <div class="tiroir"><div><div class="t">Forfait connexion, inscription et accès</div><div class="desc">Six sous-chantiers, la faille de sécurité en tête. <a href="docs/devis-82-connexion.pdf" target="_blank" rel="noopener">Devis n° 82 (PDF) ↗</a></div></div><div class="price">2 000 € HT</div></div>
+
+    <table>
+      <tr><th scope="col">Ce qu'on corrige</th><th scope="col">Ce que ça change</th></tr>
+      <tr><td><b>Fermer la faille de sécurité critique sur la connexion</b></td><td>Identifiée à la ligne près lors du diagnostic. Corrigée et vérifiée en tout premier.</td></tr>
+      <tr><td><b>Fiabiliser l'activation des comptes</b></td><td>Le lien d'activation ne meurt plus au premier aperçu automatique d'une boîte mail, et un bouton « renvoyer l'email » apparaît enfin dans l'application.</td></tr>
+      <tr><td><b>Relancer les 307 comptes déjà financés</b></td><td>Des filleuls dont l'accès est déjà payé par leur parrain récupèrent ce qui leur est dû. Envoi soumis à votre validation.</td></tr>
+      <tr><td><b>Arrêter les déconnexions intempestives</b></td><td>L'application ne déconnecte plus que sur une vraie fin de session, et affiche un écran clair quand l'accès a expiré au lieu de renvoyer brutalement à l'écran de connexion.</td></tr>
+      <tr><td><b>Fiabiliser l'envoi des emails</b></td><td>Les envois qui échouent sont réessayés puis conservés, et une alerte se déclenche en cas de panne : l'incident de fin août ne pourrait plus passer inaperçu.</td></tr>
+      <tr><td><b>Finitions</b></td><td>Messages d'erreur conformes à ce que l'application attend, parcours de parrainage sans boucle, points annexes de sécurité.</td></tr>
+    </table>
+
+    <div class="callout v2"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><b>Le chiffre à retenir :</b> sur une journée mesurée, 50 personnes sur 114 qui saisissent le bon mot de passe sont quand même refusées à l'entrée. L'objectif de ce chantier : zéro refus injustifié.</div>
+
+    <p class="note">Une partie de ce chantier vit dans l'application mobile et passera par une mise à jour sur les stores. On la prépare en tête de file pour absorber le délai de validation d'Apple et de Google.</p>
+
+    <!-- ===== 4. CHANTIER 2 ===== -->
+    <h2 id="paiements"><span class="h2n">4</span>Chantier 2 · Paiements et abonnements</h2>
+    <p class="lead">Le seul flux payant de l'application, celui qui fait vivre vos 631 abonnements actifs. Sept sous-chantiers, du tunnel d'abonnement au branchement en temps réel avec Stripe.</p>
+
+    <div class="tiroir"><div><div class="t">Forfait paiements et abonnements</div><div class="desc">Sept sous-chantiers, la faille d'attribution en tête. Devis joint au mail.</div></div><div class="price">2 500 € HT</div></div>
+
+    <table>
+      <tr><th scope="col">Ce qu'on corrige</th><th scope="col">Ce que ça change</th></tr>
+      <tr><td><b>Fermer la faille sur l'attribution des abonnements</b></td><td>Plus aucun accès Fit Motivator accordé sans vérification du paiement auprès de Stripe.</td></tr>
+      <tr><td><b>Mesurer puis réparer le tunnel d'abonnement</b></td><td>Un tiers des tentatives échoue aujourd'hui. Chaque échec sera désormais tracé avec sa cause, puis corrigé. C'est le poste le plus rentable de toute cette page.</td></tr>
+      <tr><td><b>Récupérer les clients coupés à tort</b></td><td>Un prélèvement qui échoue ne coupe plus l'accès immédiatement : le client est prévenu, l'accès est maintenu pendant la période de régularisation. 4 clients fidèles sont à récupérer dès maintenant.</td></tr>
+      <tr><td><b>Créer l'écran « mettre à jour mon moyen de paiement »</b></td><td>Il n'existe pas aujourd'hui : une carte expirée, c'est un client perdu sans un mot.</td></tr>
+      <tr><td><b>Rendre l'annulation fiable</b></td><td>Cliquer « annuler » annule le bon abonnement, y compris pour les 7 abonnés actuellement concernés par des annulations sans effet.</td></tr>
+      <tr><td><b>Brancher Stripe en temps réel</b></td><td>Impayés, résiliations, remboursements : l'application est prévenue au moment où ça se passe, au lieu d'un contrôle partiel toutes les six heures.</td></tr>
+      <tr><td><b>Remettre sous contrôle les abonnements invisibles</b></td><td>Les 9 abonnements que l'application ignore sont rapprochés un par un, et un contrôle périodique empêche que ça se reproduise. Sécurisation des clés et garde-fous sur les commandes sensibles au passage.</td></tr>
+    </table>
+
+    <div class="callout warn"><svg class="ico" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><b>Pourquoi ce chantier vaut plus que 7 correctifs :</b> quand un Fit Motivator cesse de payer, tous ses challengers perdent leur accès avec lui. Chaque paiement qui échoue ou se perd n'est pas un abonné en moins, c'est un groupe entier.</div>
+
+    <p class="note">Le tunnel d'abonnement se traite en deux temps : la mesure part dès le premier jour, la correction suit ce qu'elle révèle une à deux semaines plus tard. Tout le reste du chantier n'attend pas.</p>
+
+    <!-- ===== 5. MIGRATION ===== -->
+    <h2 id="migration"><span class="h2n">5</span>La migration, livrée</h2>
+    <p class="lead">Ce forfait ne porte pas sur un travail à venir : il est livré, et il tourne depuis le 27 août.</p>
+
+    <div class="tiroir"><div><div class="t">Migration de l'infrastructure</div><div class="desc">Livrée le 27 août, effets de bord couverts. <a href="docs/facture-20249-migration.pdf" target="_blank" rel="noopener">Facture n° 20249 (PDF) ↗</a></div></div><div class="price done">1 500 € HT</div></div>
+
+    <ul>
+      <li><b>Ce qui a été fait :</b> 25 000 comptes et 14 Go de photos déplacés sans interruption de service, domaine repris, déploiement automatisé, le tout sur votre propre serveur, sans plus aucune dépendance à l'ancien prestataire.</li>
+      <li><b>Ce que le forfait couvre encore :</b> si un dysfonctionnement lié à la migration apparaît dans les prochaines semaines, on le corrige, c'est inclus.</li>
+      <li><b>Ce qu'on a fait sans le facturer :</b> les correctifs des deux incidents d'envoi de messages de fin août, et la relance des comptes restés en attente. Ils apparaissent à 0 € sur la facture : c'est notre part du chantier.</li>
+    </ul>
+
+    <div class="callout v2"><svg class="ico" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><b>Une exception, pas une habitude.</b> Facturer après livraison n'est pas notre façon de travailler : la passation avec Datasolution imposait d'avancer sans attendre. À partir de maintenant, le circuit est celui des deux chantiers ci-dessus : un devis validé d'abord, des travaux livrés ensuite. Aucune facture a posteriori.</div>
+
+    <!-- ===== 6. CHIFFRAGE ET CALENDRIER ===== -->
+    <h2 id="calendrier"><span class="h2n">6</span>Chiffrage et calendrier</h2>
+    <p class="lead">Pas de compteur d'heures : des forfaits. Vous connaissez le coût exact avant de dire go, et y passer le temps qu'il faut devient notre problème, pas le vôtre.</p>
+
+    <table>
+      <tr><th scope="col">Document</th><th scope="col">Objet</th><th scope="col">Montant</th></tr>
+      <tr><td><a href="docs/devis-82-connexion.pdf" target="_blank" rel="noopener">Devis n° 82 ↗</a></td><td>Chantier connexion, inscription et accès</td><td><b>2 000 € HT</b></td></tr>
+      <tr><td>Devis n° 83</td><td>Chantier paiements et abonnements</td><td><b>2 500 € HT</b></td></tr>
+    </table>
+
+    <div class="tot"><span class="mut">Les deux chantiers à valider</span><b>4 500 € HT</b></div>
+
+    <p class="note">La <a href="docs/facture-20249-migration.pdf" target="_blank" rel="noopener">facture de la migration</a> (1 500 € HT) accompagne le même envoi mais ne fait pas partie de la décision à prendre : elle couvre un travail déjà livré, détaillé en section 5.</p>
+
+    <div class="card" style="margin-top:22px">
+      <div class="phase"><div class="p">Votre go</div><div>Les deux devis signés avec la mention « bon pour accord », par retour de mail.</div><div class="d">avant le ven. 05/09</div></div>
+      <div class="phase"><div class="p">Démarrage</div><div>Pierre démarre le jour du go, les deux failles de sécurité en tête de file, puis la mise à jour mobile pour absorber le délai des stores.</div><div class="d">immédiat</div></div>
+      <div class="phase"><div class="p">Challenge</div><div>Les correctifs côté serveur sont en production pour le lancement du challenge.</div><div class="d">avant le 14/09</div></div>
+      <div class="phase"><div class="p">Dans la foulée</div><div>La mise à jour mobile arrive au rythme de validation des stores, et le tunnel de paiement se corrige derrière sa période de mesure.</div><div class="d">mi-sept. → fin sept.</div></div>
+    </div>
+
+    <p class="note">Trois délais ne dépendent pas de nous et sont posés ici pour ne surprendre personne : la validation des stores pour la partie mobile, les tests de paiement en conditions réelles sur le tunnel, et votre validation avant toute relance des 307 comptes déjà financés.</p>
+
+    <!-- ===== 7. LA SUITE ===== -->
+    <h2 id="suite"><span class="h2n">7</span>La suite</h2>
+    <p class="lead">Ces deux forfaits corrigent ce qui existe. Deux sujets restent volontairement dehors, pour ne pas mettre en risque le 14 septembre.</p>
+
+    <div class="scopebox out">
+      <h3>Volontairement hors de ces forfaits</h3>
+      <ul style="margin-bottom:0">
+        <li><b>La dette technique de fond</b> héritée du code existant (gestion des sessions, mise à jour de la version de l'API Stripe, correctif de parrainage écrit mais jamais déployé). Non nécessaire pour le 14 septembre. On la chiffre séparément si vous la retenez.</li>
+        <li><b>Les nouveautés du challenge</b> (objets connectés et autres idées) : à cadrer ensemble en réunion dédiée, pour distinguer ce qui est réaliste d'ici le 14 de ce qui mérite mieux qu'un sprint.</li>
+      </ul>
+    </div>
+
+    <h3>Concrètement, maintenant</h3>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><div class="txt"><b>Vos questions de vive voix :</b> on vous propose 30 minutes vendredi en fin de matinée, avec Pierre, pour tout passer en revue avant votre validation si besoin.</div><div class="when">ven. 05/09 · 11h30</div></div>
+      <div class="step"><div class="num">2</div><div class="txt"><b>Votre go sur les deux devis :</b> signés avec la mention « bon pour accord », par retour de mail ou à l'issue de l'échange. C'est la seule chose qui conditionne le calendrier.</div><div class="when">avant ven. 05/09</div></div>
+      <div class="step"><div class="num">3</div><div class="txt"><b>Pierre démarre,</b> failles de sécurité en tête, et on cale le point hebdomadaire de suivi. On a la disponibilité pour commencer dès votre go.</div><div class="when">jour du go</div></div>
+      <div class="step"><div class="num">4</div><div class="txt"><b>Réunion challenge du 14 septembre :</b> en équipe, pour poser ensemble ce que vous voulez y montrer et ce qui est réaliste d'ici là. On vous propose le jeudi 10 à 15h.</div><div class="when">jeu. 10/09 · 15h</div></div>
+    </div>
+
+    <div class="callout"><svg class="ico" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><b>Un doute, une question :</b> appelez-moi, ou écrivez à <a href="mailto:guillaume@tractr.net">guillaume@tractr.net</a>. Si un point mérite un échange à l'oral, on le prend.</div>
+
+  </main>
+</div>
+
+<script>
+/* Navigation : surligne l'entrée active au scroll + scroll doux au clic. NE PAS modifier. */
+const links=[...document.querySelectorAll('#nav a')];
+const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+function onScroll(){
+  let i=secs.length-1;
+  for(let k=0;k<secs.length;k++){
+    if(secs[k].getBoundingClientRect().top>120){i=k-1;break}
+  }
+  if(i<0)i=0;
+  links.forEach(l=>l.classList.remove('active'));
+  if(links[i])links[i].classList.add('active');
+}
+document.addEventListener('scroll',onScroll,{passive:true});
+onScroll();
+const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+links.forEach(a=>a.addEventListener('click',e=>{
+  e.preventDefault();
+  document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:reduceMotion?'auto':'smooth'});
+}));
+</script>
+</body>
+</html>
