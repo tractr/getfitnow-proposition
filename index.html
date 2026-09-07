@@ -89,7 +89,9 @@
   .phase{display:grid;grid-template-columns:150px 1fr auto;gap:18px;align-items:start;padding:14px 0;border-bottom:1.5px solid var(--border-light)}
   .phase:last-child{border-bottom:none}
   .phase .p{font-family:var(--display);font-weight:700;color:var(--acc)}
-  .phase .d{font-family:var(--mono);font-size:12px;color:var(--ink);white-space:nowrap;background:var(--acc-soft);padding:3px 9px;border-radius:3px;border:2px solid var(--border)}
+  .phase .d{font-family:var(--mono);font-size:12px;color:var(--ink);white-space:nowrap;background:var(--acc-soft);padding:3px 9px;border-radius:3px;border:2px solid var(--border);min-width:180px;text-align:center}
+  .phase .d.ok{background:var(--green)}
+  .phase .d.wait{background:var(--yellow)}
   .steps{display:grid;gap:14px;margin:16px 0}
   .step{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;background:var(--card-bg);border:2px solid var(--border);border-radius:var(--r);padding:15px 18px;box-shadow:var(--sh)}
   .step .num{width:36px;height:36px;border-radius:50%;background:var(--acc);color:#fff;font-family:var(--display);font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center;border:2px solid var(--border);box-shadow:2px 2px 0 var(--border-light);flex:none}
@@ -286,10 +288,11 @@
     <p class="note">La <a href="docs/facture-20249-migration.pdf" target="_blank" rel="noopener">facture de la migration</a> (1 500 € HT) accompagne le même envoi mais ne fait pas partie de la décision à prendre : elle couvre un travail déjà livré, détaillé en section 6.</p>
 
     <div class="card" style="margin-top:22px">
-      <div class="phase"><div class="p">Votre go</div><div>Les trois devis signés avec la mention « bon pour accord », par retour de mail. Les devis 82 et 83 sont validés à l'oral depuis le 3 septembre : il reste la signature.</div><div class="d">avant le mer. 09/09</div></div>
-      <div class="phase"><div class="p">Démarrage</div><div>Les chantiers 1 et 2 sont engagés, les deux failles de sécurité en tête de file, puis la mise à jour mobile pour absorber le délai des stores. Le chantier 3 démarre à la signature de son devis.</div><div class="d">en cours</div></div>
-      <div class="phase"><div class="p">Challenge</div><div>Les correctifs côté serveur sont en production pour le lancement du challenge.</div><div class="d">avant le 14/09</div></div>
-      <div class="phase"><div class="p">Dans la foulée</div><div>La mise à jour mobile arrive au rythme de validation des stores, et le tunnel de paiement se corrige derrière sa période de mesure.</div><div class="d">mi-sept. → fin sept.</div></div>
+      <div class="phase"><div class="p">Votre go</div><div>Les trois devis signés avec la mention « bon pour accord », par retour de mail. Les devis 82 et 83 sont validés par écrit depuis le 3 septembre : il reste la signature.</div><div class="d ok">avant le mer. 09/09</div></div>
+      <div class="phase"><div class="p">Démarrage</div><div>Les chantiers 1 et 2 sont engagés, les deux failles de sécurité en tête de file, puis la mise à jour mobile pour absorber le délai des stores. Le chantier 3 démarre à la signature de son devis.</div><div class="d wait">en cours</div></div>
+      <div class="phase"><div class="p">Réunion roadmap</div><div>En équipe, pour ordonner la suite et distinguer ce qui tient d'ici le 14 de ce qui mérite mieux qu'un sprint. Merci de venir avec votre priorisation, must have contre cerise sur le gâteau.</div><div class="d wait">jeu. 10/09, 15h</div></div>
+      <div class="phase"><div class="p">Challenge</div><div>Les correctifs côté serveur sont en production pour le lancement du challenge.</div><div class="d wait">avant le 14/09</div></div>
+      <div class="phase"><div class="p">Dans la foulée</div><div>La mise à jour mobile arrive au rythme de validation des stores, et le tunnel de paiement se corrige derrière sa période de mesure.</div><div class="d wait">mi-sept. → fin sept.</div></div>
     </div>
 
     <p class="note">Trois délais ne dépendent pas de nous et sont posés ici pour ne surprendre personne : la validation des stores pour la partie mobile, les tests de paiement en conditions réelles sur le tunnel, et votre validation avant toute relance des 307 comptes déjà financés.</p>
